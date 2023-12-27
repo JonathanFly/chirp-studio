@@ -8,7 +8,7 @@
 ![image](https://github.com/JonathanFly/chirp-studio/assets/163408/22398352-00f7-4153-b4d9-3737211752bb)
 
 ## Install
-1. Download zip
+1. Download zip https://github.com/JonathanFly/chirp-studio/releases
 2. Extract files
 3. Chrome -> Extensions -> Load Unpacked -> Pick folder "chirp-studio-chrome-extension"
    
