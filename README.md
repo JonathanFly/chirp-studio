@@ -3,7 +3,7 @@
 ## Chrome Extension Audio Visualizer for Suno's Chirp [Music AI](https://app.suno.ai/)
 
 
-"I wonder if I get a Chirp visualizer working in less than an hour..." 
+"I wonder if I can get a Chirp visualizer working in less than an hour..." 
 
 ![image](https://github.com/JonathanFly/chirp-studio/assets/163408/22398352-00f7-4153-b4d9-3737211752bb)
 
