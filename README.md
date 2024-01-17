@@ -1,7 +1,11 @@
-# chirp-studio
+# Suno Music Tweaks 
 
-## Chrome Extension Audio Visualizer for Suno's Chirp [Music AI](https://app.suno.ai/)
+Little one-off scripts I wrote for myself I may as well share. 
 
+1. Audio Visualizer Chrome Extension
+2. UI Tweak Bookmarket: add custom notes to each track, direct song part links, create data and duration metadata.
+
+## 1. Chrome Extension Audio Visualizer for Suno's Chirp [Music AI](https://app.suno.ai/)
 
 "I wonder if I can get a Chirp visualizer working in less than an hour..." 
 
@@ -16,7 +20,7 @@ https://github.com/JonathanFly/chirp-studio/assets/163408/914813b2-fd1f-431e-8b5
 
 Might have to refresh on the Chirp site, there's no proper load order code. Just a big blob of javasscript.
 
-## Jonathan's Janky Chirp Tweaks 
+## 2. Jonathan's Janky Chirp UI Tweaks 
 
 Bit of code to make it easier to deal with large Chirp libraries.
 
