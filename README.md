@@ -3,7 +3,7 @@
 Little one-off scripts I wrote for myself I may as well share. 
 
 1. Simple Wavform and Volume Bookmarklet
-2. Audio Visualizer Chrome Extension
+2. Audio Visualizer Chrome Extension (not working: needs to be updated to work with new Suno website)
 3. UI Tweak Bookmarket: add custom notes to each track, direct song part links, create data and duration metadata. (not working at the moment)
 
 ## 1. Simple Wavform and Volume
