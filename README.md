@@ -2,10 +2,22 @@
 
 Little one-off scripts I wrote for myself I may as well share. 
 
-1. Audio Visualizer Chrome Extension
-2. UI Tweak Bookmarket: add custom notes to each track, direct song part links, create data and duration metadata.
+1. Simple Wavform and Volume Bookmarklet
+2. Audio Visualizer Chrome Extension
+3. UI Tweak Bookmarket: add custom notes to each track, direct song part links, create data and duration metadata. (not working at the moment)
 
-## 1. Chrome Extension Audio Visualizer for Suno's Chirp [Music AI](https://app.suno.ai/)
+## 1. Simple Wavform and Volume
+
+1. Pick "Add New Bookmark" in Booksmarks Manager (or "Add Page" in the bookmark bar)
+2. **Bookmark Name:** "Suno Wavform" (whatever you want)
+3. **Bookmark URL:** copy the block of code below that starts with "javascript" including the word javascript. 
+4. On Chirp library page, click this newly added bookmark link. Then play a song.
+
+```
+javascript:(function()%7Bconst%20loadWavesurfer%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20if%20(!window.WaveSurfer)%20%7B%0A%20%20%20%20%20%20const%20script%20%3D%20document.createElement('script')%3B%0A%20%20%20%20%20%20script.src%20%3D%20'https%3A%2F%2Funpkg.com%2Fwavesurfer.js'%3B%0A%20%20%20%20%20%20document.head.appendChild(script)%3B%0A%20%20%20%20%20%20script.onload%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20initWaveSurfer()%3B%0A%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20initWaveSurfer()%3B%0A%20%20%20%20%7D%0A%20%20%7D%3B%0A%20%20%0A%20%20const%20initWaveSurfer%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20const%20audioElement%20%3D%20document.querySelector('audio')%3B%0A%20%20%20%20%20%20%20%20const%20waveContainer%20%3D%20document.createElement('div')%3B%0A%20%20%20%20waveContainer.id%20%3D%20'waveformdiv'%3B%0A%0A%0A%20%20%20%20const%20SunoSlider%20%3D%20document.querySelector('.chakra-slider')%3B%0A%20%20%20%20%0A%20%20%20%20SunoSlider.appendChild(waveContainer)%3B%0A%20%20%20%20%0A%20%20%20%20const%20wavesurfer%20%3D%20WaveSurfer.create(%7B%0A%20%20%20%20%20%20container%3A%20waveContainer%2C%0A%20%20%20%20%20%20waveColor%3A%20'violet'%2C%0A%20%20%20%20%20%20progressColor%3A%20'purple'%2C%0A%20%20%20%20%20%20barWidth%3A%201%2C%0A%20%20%20%20%20%20barGap%3A%200.5%2C%0A%20%20%20%20%20%20cursorWidth%3A%201%2C%0A%20%20%20%20%20%20backend%3A%20'MediaElement'%2C%0A%20%20%20%20%20%20%2F%2F%20mediaControls%3A%20true%0A%20%20%20%20%7D)%3B%0A%20%20%0A%0A%20%20%20%20wavesurfer.load(audioElement.src)%3B%0A%20%20%20%20%20%20new%20MutationObserver(()%20%3D%3E%20wavesurfer.load(audioElement.src))%0A%20%20%20%20%20%20.observe(audioElement%2C%20%7B%20attributes%3A%20true%2C%20attributeFilter%3A%20%5B'src'%5D%20%7D)%3B%0A%20%20%0A%20%20%20%20addVolumeControl(wavesurfer%2C%20waveContainer)%3B%0A%20%20%20%20addSpeedControl(wavesurfer%2C%20waveContainer)%3B%0A%20%20%7D%3B%0A%0Aconst%20addVolumeControl%20%3D%20(wavesurfer%2C%20container)%20%3D%3E%20%7B%0A%20%20%20%20if%20(!wavesurfer)%20return%3B%0A%0A%20%20%20%20const%20volumeControl%20%3D%20document.createElement('input')%3B%0A%20%20%20%20volumeControl.type%20%3D%20'range'%3B%0A%20%20%20%20volumeControl.min%20%3D%200%3B%0A%20%20%20%20volumeControl.max%20%3D%201%3B%0A%20%20%20%20volumeControl.step%20%3D%200.01%3B%0A%20%20%20%20volumeControl.value%20%3D%20wavesurfer.getVolume()%3B%0A%20%20%20%20volumeControl.title%20%3D%20'Volume'%3B%0A%20%20%20%20volumeControl.name%20%3D%20'Volume'%3B%0A%20%20%20%20volumeControl.classList.add('volume-control')%3B%20%2F%2F%20Add%20class%20for%20styling%0A%20%20%20%20volumeControl.addEventListener('input'%2C%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20wavesurfer.setVolume(volumeControl.value)%3B%0A%20%20%20%20%20%20audioElement.volume%20%3D%20volumeControl.value%3B%0A%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20containerParent%20%3D%20container.parentElement.parentElement%3B%0A%20%20%20%20containerParent.appendChild(volumeControl)%3B%0A%7D%3B%0A%0Aconst%20addSpeedControl%20%3D%20(wavesurfer%2C%20container)%20%3D%3E%20%7B%0A%20%20%20%20if%20(!wavesurfer)%20return%3B%0A%0A%20%20%20%20const%20speedControlContainer%20%3D%20document.createElement('div')%3B%0A%20%20%20%20speedControlContainer.classList.add('speed-control-container')%3B%0A%0A%20%20%20%20const%20speedControl%20%3D%20document.createElement('input')%3B%0A%20%20%20%20speedControl.type%20%3D%20'range'%3B%0A%20%20%20%20speedControl.min%20%3D%200.5%3B%0A%20%20%20%20speedControl.max%20%3D%202%3B%0A%20%20%20%20speedControl.step%20%3D%200.1%3B%0A%20%20%20%20speedControl.value%20%3D%20wavesurfer.getPlaybackRate()%3B%0A%20%20%20%20speedControl.classList.add('speed-control')%3B%20%0A%0A%20%20%20%20const%20speedDisplay%20%3D%20document.createElement('span')%3B%0A%20%20%20%20speedDisplay.classList.add('speed-display')%3B%0A%20%20%20%20speedDisplay.textContent%20%3D%20%60Speed%3A%20%24%7BspeedControl.value%7D%60%3B%0A%0A%20%20%20%20speedControl.addEventListener('input'%2C%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20wavesurfer.setPlaybackRate(speedControl.value)%3B%0A%20%20%20%20%20%20audioElement.playbackRate%20%3D%20speedControl.value%3B%0A%0A%20%20%20%20%20%20speedDisplay.textContent%20%3D%20%60Speed%3A%20%24%7BparseFloat(speedControl.value).toFixed(2)%7D%60%3B%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20speedControlContainer.appendChild(speedControl)%3B%0A%20%20%20%20speedControlContainer.appendChild(speedDisplay)%3B%0A%0A%20%20%20%20containerParent%20%3D%20container.parentElement.parentElement%3B%0A%0A%20%20%20%20containerParent.appendChild(speedControlContainer)%3B%0A%7D%3B%0A%0Aconst%20addStyles%20%3D%20()%20%3D%3E%20%7B%0A%20%20const%20style%20%3D%20document.createElement('style')%3B%0A%20%20style.innerHTML%20%3D%20%60%0A%20%20%23waveformdiv%20%7B%0A%20%20%20%20width%3A%20100%25%3B%0A%20%20%20%20position%3A%20absolute%3B%0A%20%20%20%20top%3A%20-120px%3B%0A%20%20%7D%0A%0A%20%20.volume-control%2C%20.speed-control%2C%20.speed-control-container%20%7B%0A%20%20%20%20margin%3A%2010px%200%3B%0A%20%20%20%20position%3A%20absolute%3B%0A%0A%20%20%20%0A%20%20%7D%0A.speed-control%20%7B%0A%20%20left%3A%2030%25%3B%0A%7D%0A%0Aspan.speed-display%20%7B%0A%20%20position%3A%20absolute%3B%0A%20%20%20%20font-size%3A%2014px%3B%0A%20%20%20%20top%3A%20-11px%3B%0A%20%20%20%20width%3A%2080px%3B%0A%7D%0A%20%20.volume-control%20%7B%0A%20%20%20%20left%3A%20450px%3B%0A%20%20%20%20width%3A%20100px%3B%0A%20%20%7D%0A%20%20.speed-control-container%20%7B%0A%20%20%20%20align-items%3A%20center%3B%0A%20%20%20%20left%3A%2030%25%3B%0A%20%20%20%20bottom%3A%2042px%3B%0A%20%20%7D%0A%20%20.speed-display%20%7B%0A%20%20%20%20margin-left%3A%2010px%3B%0A%20%20%7D%0A%60%3B%0A%0A%0A%20%20document.head.appendChild(style)%3B%0A%7D%3B%0A%0Aconst%20audioElement%20%3D%20document.querySelector('audio')%3B%0AloadWavesurfer()%3B%0AaddStyles()%3B%7D)()%3B
+```
+
+## 2. Chrome Extension Audio Visualizer for Suno's Chirp [Music AI](https://app.suno.ai/)
 
 "I wonder if I can get a Chirp visualizer working in less than an hour..." 
 
@@ -20,7 +32,7 @@ https://github.com/JonathanFly/chirp-studio/assets/163408/914813b2-fd1f-431e-8b5
 
 Might have to refresh on the Chirp site, there's no proper load order code. Just a big blob of javasscript.
 
-## 2. Jonathan's Janky Chirp UI Tweaks 
+## 3. Jonathan's Janky Chirp UI Tweaks 
 
 Bit of code to make it easier to deal with large Chirp libraries.
 
@@ -36,7 +48,7 @@ Bit of code to make it easier to deal with large Chirp libraries.
 3. **Bookmark URL:** copy the block of code below that starts with "javascript" including the word javascript. 
 4. On Chirp website, click this newly added bookmark link. Then navigate through your library, after the page loads, the script will add the extra metadata to each song. You will have to click the bookmark each new time you go to the site, but any notes added to songs will persist.
 
-This is just a big yarn ball of javascript on a timer, but it does work on my system. 
+This is just a big yarn ball of javascript on a timer, but it does work on my system. (I'm not sure if one still works.)
 
 
 ```
