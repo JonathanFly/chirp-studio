@@ -7,6 +7,7 @@ Little one-off scripts I wrote for myself I may as well share.
 3. UI Tweak Bookmarket: add custom notes to each track, direct song part links, create data and duration metadata. (not working at the moment)
 
 ## 1. Simple Wavform and Volume
+![image](https://github.com/JonathanFly/chirp-studio/assets/163408/71c76a93-9f73-4b36-85f6-da377f730318)
 
 1. Pick "Add New Bookmark" in Booksmarks Manager (or "Add Page" in the bookmark bar)
 2. **Bookmark Name:** "Suno Wavform" (whatever you want)
