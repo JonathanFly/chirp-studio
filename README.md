@@ -2,6 +2,13 @@
 
 Little one-off scripts I wrote for myself I may as well share. 
 
+# Suno Search Bookmarklet (Still partially working but no plans to update)
+
+![image](https://github.com/JonathanFly/chirp-studio/assets/163408/65081b99-8840-463b-8293-dddff7faf240)
+
+[Install Search Here](https://jonathanfly.github.io/chirp-studio/)
+
+# OLD and Broken Below 
 1. Simple Wavform and Volume Bookmarklet
 2. Audio Visualizer Chrome Extension (not working: needs to be updated to work with new Suno website)
 3. UI Tweak Bookmarket: add custom notes to each track, direct song part links, create data and duration metadata. (not working at the moment)
