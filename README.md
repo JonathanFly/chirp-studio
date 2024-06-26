@@ -1,6 +1,11 @@
 # Suno Music Tweaks 
 
 Little one-off scripts I wrote for myself I may as well share. 
+# Suno Mark Duplicate Playlist Songs Bookmarklet
+[Install Duplicate Playlist Here](https://jonathanfly.github.io/chirp-studio/)
+
+![mark_playlist_duplicates](https://github.com/JonathanFly/chirp-studio/assets/163408/6125b0ef-5b36-489b-8246-df6669f73d56)
+
 
 # Suno Search Bookmarklet (Still partially working but no plans to update)
 
